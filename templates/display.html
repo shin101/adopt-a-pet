@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block title %}Display{% endblock %}
+
+{% block content %}
+<h2>{{pet.name.capitalize()}}</h2> 
+<ul>
+    {% if pet.photo_url %}
+    <img src="{{pet.photo_url}}" width="250" height="250">
+    {% endif %}
+    
+    <li>Species : {{pet.species}}</li>
+   {% if pet.age %}
+   <li>Age: {{pet.age}}</li>
+   {% endif %}
+
+   {% if pet.notes %}
+   <li>Notes: {{pet.notes}}</li>
+   {% endif %}
+
+</ul>
+
+
+
+<h2>Edit pet</h2> 
+
+<form method="POST">
+    {{ form.hidden_tag() }}
+    <!-- if field.widget... part is for security so bad actors cant insert thier form-->
+    {% for field in form if field.widget.input_type != 'hidden' %}
+    <p>
+        {{ field.label }}
+        {{field}}
+
+    </p>
+    {% endfor %}
+    <button>Submit</button>
+</form>
+
+
+
+{% endblock %}
